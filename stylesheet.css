@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+/* # VARIABLES  */
+
+:root {
+	--number-size: clamp(5rem, 33vw, 20rem);
+	--max-width: min(75vw, 42rem);
+}
+
+/* # COMMON STYLES  */
+
+body {
+	margin: 0;
+	padding: 2.5%;
+
+	font-family: "Inter", sans-serif;
+}
+
+/* ## Links  */
+
+a {
+	border-bottom: 0.1em solid;
+
+	color: black;
+	text-decoration: none;
+	/* & from experiments, `text-decoration-XYZ` properties don't appear to animate well */
+
+	transition: 0.075s border-bottom-width ease-in-out;
+}
+
+a:hover {
+	border-bottom-width: 0.4em;
+}
+
+/* ## Paragraphs  */
+
+p {
+	margin: 0;
+}
+
+p + p {
+	margin-top: 1.5em;
+}
+
+/* # <HEADER /> STYLES  */
+
+body > header {
+	max-width: max(90%, 24em);
+
+	margin-inline-start: auto;
+
+	font-size: 2.5em;
+	line-height: 1.25;
+	/* * metrics from https://rsms.me/inter/dynmetrics */
+	letter-spacing: -0.022em;
+}
+
+.postscriptum {
+	max-width: max(40%, 24.25rem);
+
+	margin-block-start: 3em;
+	margin-inline-start: auto;
+
+	font-size: 0.7em;
+}
+
+/* # <MAIN /> STYLES */
+
+main {
+	display: grid;
+	grid-template-columns: 1fr 5fr;
+
+	margin-block-start: 8em;
+	margin-block-end: 70vh;
+}
+
+main article {
+	display: grid;
+	grid-template-columns: calc(var(--number-size) * 0.5) 3.5fr;
+	column-gap: calc(0.75em + 2.5vw);
+}
+
+main p {
+	font-size: 1.25em;
+	line-height: 1.4;
+	letter-spacing: -0.017em;
+}
+
+/*  ## Header  */
+
+main header {
+	display: flex;
+	flex-direction: column-reverse;
+
+	min-height: var(--number-size);
+
+	margin-block-end: 2em;
+}
+
+main header h1,
+main header h2 {
+	margin: 0;
+}
+
+main header h1 {
+	margin-top: 0.1em;
+
+	font-size: 4em;
+	line-height: 1.1;
+	letter-spacing: -0.022em;
+}
+
+main header h2 {
+	font-size: 1.1rem;
+	font-weight: normal;
+	letter-spacing: -0.011em;
+}
+
+/*  ## Numbers  */
+
+main > .wrapper,
+article .wrapper {
+	justify-self: self-start;
+
+	position: sticky;
+	top: 0;
+
+	/* * fixes height to a value so that the number sticks */
+	height: var(--number-size);
+
+	/* * prevents the block of `.wrapper` from covering the text */
+	z-index: -1;
+}
+
+main > .wrapper {
+	justify-self: end;
+	grid-row: span 10;
+}
+
+.number {
+	font-size: var(--number-size);
+}
+
+.number.mobile {
+	display: none;
+}
+
+@media (max-width: 560px) {
+	main {
+		grid-template-columns: 1em 3fr;
+	}
+
+	/* & `display: none` breaks the grid layout */
+	main > .wrapper {
+		visibility: hidden;
+		width: 0;
+	}
+}
